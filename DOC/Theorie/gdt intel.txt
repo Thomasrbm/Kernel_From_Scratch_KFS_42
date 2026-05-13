@@ -1,0 +1,19 @@
+
+C est intel qui a grave le fonctionnement du GDT
+
+
+file:///home/throbert/Downloads/325462-091-sdm-vol-1-2abcd-3abcd-4-1.pdf
+
+"The base linear address and limit of the GDT must be loaded into the GDTR register. [...] Each system must have one GDT defined, 
+which may be used for all programs and tasks in the system."
+
+
+"The first descriptor in the GDT is not used by the processor. 
+A segment selector to this 'null descriptor' does not generate an exception when loaded into a data-segment register (DS, ES, FS, or GS), 
+but it always generates a general-protection exception (#GP) when an attempt is made to access memory using the descriptor."
+
+
+
+
+
+

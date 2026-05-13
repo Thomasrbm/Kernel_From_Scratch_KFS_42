@@ -1,0 +1,63 @@
+
+
+----- __attribute__((packed))
+
+
+dit a gcc de ne pas add de padding entre les champs
+
+exemple 2 byte de padding entre uint 16 et 32 dans gdtr
+de base. = 8.
+
+
+sans packed tout serait decalaer dans la gdt et ce serait
+mal lu.
+
+
+=> packed.
+
+
+
+
+----- Gdtr
+
+struct gdtr {
+    uint16_t limite;  // taille de la GDT  (- 1)
+    uint32_t base;    // adresse en RAM de la GDT
+} __attribute__((packed));
+
+6 byte en tout.
+
+le gdt ptr
+
+c est la structure qu on passe a lgdt
+
+
+
+
+------ Gdt descriptors 
+
+
+
+les entrees (defini un segment chacune)
+
+
+
+typedef struct s_gdt_entry
+{
+    uint16_t    limit_low; // taille du segment
+    uint16_t    base_low; // base divided raison historique :  c est l adresse memoire du segment
+    uint8_t     base_mid;
+    uint8_t     access; // definit le niveau de privilege
+    uint8_t     flags_limit;
+    uint8_t     base_high;
+} __attribute__((packed)) t_gdt_entry;
+
+
+// flag limit : G = Granularite (unite de multiplication pour la limite, taille du segment) ,   DB = 0 si 16bit 1 32 , AVL =  bit reserved pour l OS
+// G=0  →  ×1      →  max 1MB
+// G=1  →  ×4096   →  max 4GB
+
+// pour nous : 
+// G=1, DB=1, L=0, AVL=0
+// = 1100 en binaire
+// = 0xC

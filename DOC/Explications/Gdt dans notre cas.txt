@@ -1,0 +1,122 @@
+La GDT de GRUB — 3 entrées :
+
+0 : null
+1 : kernel code  DPL=0  flat 0-4GB
+2 : kernel data  DPL=0  flat 0-4GB
+
+
+
+
+
+
+
+
+
+NOUS 
+
+
+0 : null
+1 : kernel code   DPL=0  flat 0-4GB
+2 : kernel data   DPL=0  flat 0-4GB
+3 : kernel stack  DPL=0  flat 0-4GB
+4 : user code     DPL=3  flat 0-4GB
+5 : user data     DPL=3  flat 0-4GB
+6 : user stack    DPL=3  flat 0-4GB
+
+
+
+
+0 = kernel only
+3 = user et kernel
+
+
+
+
+Pour tester 
+
+montre que si mal config ca crasherait.
+
+
+1. kernel boote
+2. tu appelles gdt_init()
+3. lgdt s'exécute
+4. kernel continue de tourner normalement
+→ si pas de triple fault = GDT correcte
+
+
+
+info gdt (la cmd)
+
+
+
+
+
+et le stack printer qui montre vraiment l etat 
+de la stack et sa segmentation
+
+
+
+
+
+
+
+
+
+
+
+------- Comment ca marche.
+
+
+DPL :   Descriptor Privilege Level
+
+
+Le cpu check le CPL (level du code courrant) et verifie si
+l user peut l exec.
+
+
+
+
+
+------ LA GDT REELLE.
+
+EXEMPLE pour les binaire compiled hors kernel.
+
+
+
+ls.elf, cat.elf,  executer depuis SOIT :
+
+- un file system simple (execve absolut path)
+- Multiboot module "separe" et recoit l adress avec multiboot_info
+- compil dans le kernel hardcode initrd
+
+
+
+
+
+initrd = 
+
+// user/hello.c
+void _start()
+{
+    // syscall write hardcodé en ASM inline
+    asm volatile (
+        "mov $4, %eax\n"   // syscall write
+        "mov $1, %ebx\n"   // stdout
+        "int $0x80\n"
+    );
+    while(1);
+}
+
+
+gcc -m32 -nostdlib -static -o hello.elf hello.c
+objcopy -O binary hello.elf hello.bin
+
+
+// dans  kernel
+static const uint8_t g_user_program[] = {
+    0x55, 0x89, 0xe5, 0xb8, 0x04, 0x00...  // le binaire hello.bin
+};
+
+
+POUR NOUS CA SERT A RIEN, on ne fait que setup, mais la GDT
+est pas vraiment used.

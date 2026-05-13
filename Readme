@@ -1,0 +1,28 @@
+
+
+https://wiki.osdev.org/Global_Descriptor_Table
+
+
+
+Faire la GDT qui agence les segments et donne les niveau de privileges
+user/kernel.
+
+
+
+---- montrer pk ca marche
+
+
+// 0x1A sur entry 1 pour les perm (p = 0)
+
+OU 
+
+// 0x1 en limit
+
+
+
+
+----- taille 
+
+
+
+du -sh /home/throbert/Desktop/Code/Kfs_2_42/ && du -sh /home/throbert/Desktop/Code/Kfs_2_42/*/ 2>/dev/null | sort -rh

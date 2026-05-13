@@ -1,0 +1,40 @@
+
+
+
+
+
+https://samypesse.gitbook.io/how-to-create-an-operating-system/chapter-6
+
+"GRUB initializes a GDT but this GDT is does not correspond to our kernel."
+
+
+Par defaut grub load la gdt lui meme
+
+
+MAIS en full access. 
+
+
+
+Nous on ne fait que la configurer pour lui donner de nouveau
+droits.
+
+
+
+
+Le CPU fait tout : 
+
+
+" Quand ton code fait mov eax, [0x1234], le CPU fait automatiquement :
+
+-Regarde le registre DS (data segment selector, genre 0x10)
+
+-Va lire l'entrée correspondante dans la GDT en RAM
+
+-Vérifie : est-ce que 0x1234 est dans la limite du segment ? Est-ce que le DPL est compatible avec le ring courant ?
+
+-Si oui → accès autorisé, il lit la valeur
+
+-Si non → GPF (General Protection Fault), exception " 
+
+
+Le cpu sait le faire par defaut, juste il a la config du GDT en input.

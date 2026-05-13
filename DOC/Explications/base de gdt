@@ -1,0 +1,30 @@
+
+
+
+base = adresse du debut du segment 
+
+
+
+
+
+
+normalement : opre adresse :kernel code  → base=0x00100000  (là où ton code kernel est chargé)
+kernel data  → base=0x00200000  (là où tes données kernel sont)
+kernel stack → base=0x00300000  (là où ta stack kernel est)
+user code    → base=0x00400000
+
+mais gere dynamiquement
+
+
++ offset du linker.
+
+
+
+mais nous on est en "FLAT"
+
+
+
+tout est superpose a l adress 0x0000   + offset sur linker 
+
+
+donc tout est posititon static

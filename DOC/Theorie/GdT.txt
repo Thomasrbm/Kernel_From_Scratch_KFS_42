@@ -1,0 +1,42 @@
+------ GDT (Global Descriptor Table)
+
+
+defini les sections et leurs permissions
+
+
+Le cpu x86 demarre en real mode. 16 bit. pas de niveaux de privileges.
+RAM en full access
+
+
+
+
+
+passage au 32bit arrive avec la GDT protected mode
+qui met ces restrictions aux users.
+
+
+
+
+
+
+Elle va segmenter la RAM en section avec chacunes ses acces.
+
+segment = adresse du debut, taille max, droits
+
+
+
+
+c est un tableau de descripteur
+
+
+
+
+6 segments à implémenter : kernel code/data/stack + user code/data/stack
+
+
+0x00000800
+
+
+
+
+
