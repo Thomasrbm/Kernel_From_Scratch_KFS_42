@@ -6,6 +6,12 @@ Projet réalisé dans le cadre du cursus **42 — Kernel From Scratch**.
 
 ---
 
+<p align="center"><i>KFS booting in QEMU — VGA text mode, kash shell, scrollback</i></p>
+
+https://github.com/user-attachments/assets/1cfd6eac-c5e9-4e60-b9ac-81ca17f16f5b
+
+---
+
 ## Table des matières
 
 1. [Aperçu](#aperçu)
